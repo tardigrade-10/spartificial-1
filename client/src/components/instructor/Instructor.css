@@ -1,0 +1,65 @@
+.instructor .hero{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url("https://cdn-media2.leanin.org/mentorship1.jpg");
+  
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50vh;
+}
+.instructor .hero .hero-text{
+  position: absolute;
+  bottom: 54vh;
+  width: 100%;
+  color: #fff;
+}
+.instructor .hero .hero-text h1{
+  font-weight: 700;
+}
+.instructor .hero .hero-text h6{
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.instructor .work-card p{
+  font-size: 17px;
+  letter-spacing: 0.5px;
+  color: rgb(87, 5, 5);
+}
+.instructor .ready-instr{
+  padding-top: 25px;
+  background-color: darkblue;
+  color: #fff;
+}
+.instructor .why h5{
+  color: rgb(87, 5, 5);
+}
+.instructor .works h3,
+.instructor .works h6{
+  color: darkblue;
+}
+.instructor .work-card h5{
+  color: darkblue;
+}
+
+.instructor .faq h2,
+.instructor .faq h6,
+.instructor .faq h5{
+  color: darkblue;
+}
+.instructor .faq p{
+  color: rgb(87, 5, 5);
+
+}
+.modal .close{
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: gray;
+}
+.modal .form-group{
+  margin-bottom: 15px;
+}
+.modal .form-label{
+  margin-bottom: 0px;
+  font-size: 15px;
+  display: block;
+}

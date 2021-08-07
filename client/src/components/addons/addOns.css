@@ -1,0 +1,11 @@
+.addons input, .addons textarea{
+  width: 100%;
+  margin: 8px;
+  transition: all 300ms;
+}
+.addons input:hover, .addons textarea:hover{
+  background-color: aqua;
+}
+.referral{
+  padding-bottom: 60px;
+}

@@ -1,0 +1,103 @@
+#teams{
+  background: #fff;
+  font-family: Georgia;
+}
+#teams .hero{
+  background-image: linear-gradient(#0a0e2ab7,rgba(255,0,0,0.0)),url("https://erasmuscoursescroatia.com/wp-content/uploads/2020/09/online-courses-what-students-want.jpg");
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50vh;
+  text-align: left;
+}
+#teams .hero .title{
+  position: absolute;
+  bottom: 52vh;
+  left: 7vw;
+  padding-right: 10px;
+}
+#teams .hero .title h4{
+  color: #ffffff;
+}
+#teams .hero .title h1{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 900;
+  color: #ffffff;
+}
+#teams .row{
+  font-family: Arial, Helvetica,Sans-serif;
+  padding:  10px 0.5% 10px 0.5%;
+  /* border-bottom: 1px solid #c4c4c4e0; */
+}
+#teams{
+	color: green;
+}
+#teams h2{
+	font-weight: 800;
+	color: black;
+}
+#teams h5{
+	font-weight: 700;
+  color: aliceblue;
+}
+#teams h6{
+	font-weight: 500;
+	font-size: 13px;
+}
+#teams p{
+	font-weight: 500;
+	font-size: 13px;
+  color: aqua;
+}
+
+#teams .card{
+  position: relative;
+	margin: 15px 0;
+	border: none;
+  height: 350px;
+	box-shadow: 2px 2px 10px rgba(0, 128, 0, 0.336);
+  perspective: 1000px;
+}
+#teams .card-inner{
+  height: 350px;
+  background-color: #081158;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+#teams .card img{
+	margin: 3.5% 20px;
+  width: 80%;
+}
+#teams .card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+#teams .card-front, .card-back {
+  position: absolute;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  left: 0;
+  top: 0;
+}
+#teams .card-back {
+  top: 25%;
+  padding: 10%;
+  color: aliceblue;
+  transform: rotateY(180deg);
+}
+#teams .card-back p{
+  color: aliceblue;
+}
+#teams .card-back a{
+  text-decoration: none;
+  color: aliceblue;
+  padding: 5px;
+  margin: 5px;
+  display: flexbox;
+  border-radius: 4px;
+  border: 1px solid #c4c4c4;
+}
+#teams .card-back a .fa{
+  height: 16px;
+  width: 16px;
+}

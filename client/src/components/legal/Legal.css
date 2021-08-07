@@ -1,0 +1,19 @@
+#legal{
+  padding-top: 70px;
+  font-family: "Poppins",sans-serif;
+}
+#legal h1{
+  font-weight: 700;
+  text-decoration: underline;
+  color: darkblue;
+}
+#legal .col h1{
+  font-size: 23px;
+  text-decoration: none;
+  font-weight: normal;
+  color: darkblue;
+}
+#legal p{
+  color: rgb(87, 5, 5);
+  letter-spacing: 0.8px;
+}

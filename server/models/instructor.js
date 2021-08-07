@@ -1,0 +1,104 @@
+const mongoose = require('mongoose')
+const passportLocalMongoose=require('passport-local-mongoose')
+const Schema=mongoose.Schema;
+
+var joinSchema=new Schema({
+    isResolved:{
+      type:Boolean,
+      default:false
+    },
+    name:{
+        type:String,
+        required:true
+    },
+    email:{
+        type:String,
+        required:true
+    },
+    language:{
+        type:String,
+        required:true
+    },
+    linkedin:{
+        type:String,
+        required:true
+    },
+    topics:{
+      type:String,
+      required:true
+    },
+    description:{
+      type:String,
+      required:true
+    },
+    idea:{
+      type:String,
+      required:true
+    },
+    experience:{
+      type:String,
+      default:''
+    },
+    resume:{
+      type:String,
+      required:true
+    }
+},{
+    timestamps:true
+})
+
+var submitSchema=new Schema({
+  isResolved:{
+    type:Boolean,
+    default:false
+  },
+  email:{
+      type:String,
+      required:true
+  },
+  statement:{
+      type:String,
+      required:true
+  },
+  projectName:{
+      type:String,
+      required:true
+  },
+  projectObjectives:{
+    type:String,
+    required:true
+  },
+  keywords:{
+    type:String,
+    required:true
+  },
+  duration:{
+    type:String,
+    required:true
+  },
+  startDate:{
+    type:String,
+    required:true
+  },
+  help:{
+    type:Boolean,
+    required:true
+  },
+  fees:{
+    type:String,
+    required:true
+  },
+  documents:{
+    type:String,
+    required:true
+  }
+},{
+    timestamps:true
+})
+var  instructorSchema = new  Schema({
+    joinUs:[joinSchema],
+    submission:[submitSchema],
+},{
+    timestamps:true
+});
+module.exports=mongoose.model('Instructor',instructorSchema)

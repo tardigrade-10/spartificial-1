@@ -1,0 +1,24 @@
+.admin{
+  padding-top: 80px;
+  height: 75vh;
+  overflow-y: scroll;
+  margin-bottom: 8px;
+}
+.admin th{
+  text-transform: capitalize;
+}
+.modal .user-projects .user-project-inner{
+  border: 1px solid orange;
+  border-radius: 5px;
+  padding: 5px;
+  transition: all 300ms;
+  background-color: #fff;
+}
+.modal .user-projects .user-project-inner:hover{
+  background-color: aliceblue;
+}
+.modal-body h5{
+  padding-top: 20px;
+  color: darkblue;
+  border-bottom: 1px solid darkblue;
+}

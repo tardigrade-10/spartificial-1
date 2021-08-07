@@ -1,0 +1,83 @@
+.payment input{
+  border-color: aqua;
+  border-radius: 5px;
+  outline: none;
+  margin: 5px;
+  transition: all 300ms;
+  width: 100%;
+}
+.payment input:focus{
+  background-color: #9ad7f3;
+}
+
+.projects{
+  background-color: #c4c4c488;
+  letter-spacing: 0.4px;
+}
+.projects .hero{
+  background-image: linear-gradient(rgba(0,0,255,0.0),rgba(255,0,0,0.0)),url("https://d35fo82fjcw0y8.cloudfront.net/2018/06/28002700/Leverage-the-Power-of-Machine-Learning-to-Retain-Users-for-Life.png");
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50vh;
+  text-align: left;
+}
+.projects .hero .title{
+  position: absolute;
+  bottom: 56vh;
+  left: 6vw;
+}
+.projects .hero .title h4{
+  color: #ffffff;
+}
+.projects .hero .title h1{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 900;
+  color: #ffffff;
+}
+.projects-list{
+  padding-top: 5%;
+}
+.projects-list h5{
+  font-weight: 600;
+  color: darkblue;
+}
+.projects-list p{
+  line-height: 24px;
+  font-size: 15px;
+  height: 120px;
+  overflow: hidden;
+  color: rgb(87, 5, 5);
+}
+
+
+.project-desc{
+  padding-top: 80px;
+  background-color: #fff;  
+}
+.project-desc .top img{
+  box-shadow: 2px 2px 10px#000000;
+  border-radius: 0%;
+}
+.project-desc .card{
+  max-width: 200px;
+  max-height: 200px;
+}
+
+
+.sel select{
+  padding: 2px 2%;
+  margin-left: 3%;
+  width: 95.5%;
+  border: 2px ridge magenta;
+  border-radius: 4px;
+  color: rgb(51, 49, 49);
+}
+.project-desc li{
+  color: rgb(87, 5, 5);
+}
+.project-desc p{
+  color: rgb(87, 5, 5);
+
+}
