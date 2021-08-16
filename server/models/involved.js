@@ -2,6 +2,14 @@ var mongoose = require('mongoose')
 var Schema=mongoose.Schema
 
 var involvedSchema=new Schema({
+  isResolved:{
+    type:Boolean,
+    default:false
+  },
+  organisation:{
+    type:String,
+    default:""
+  },
   name:{
     type:String,
     required:true

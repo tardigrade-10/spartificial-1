@@ -22,35 +22,44 @@ projectRouter.route('/').all((req,res,next)=>{
   },err=>next(err))
   .catch(err=>next(err))
 })
-.post(authenticate.verifyUser,(req,res,next)=>{
-  //console.log(req.body)
-  const objectives=req.body.objectives.split('\n');
-  const deliverables=req.body.deliverables.split('\n');
-  const prerequisites=req.body.prerequisites.split('\n');
-  req.body.objectives=objectives
-  req.body.deliverables=deliverables
-  req.body.prerequisites=prerequisites
-  if(req.user){
-    Projects.create(req.body).then(project=>{
-      Users.findById(req.user._id).then(user=>{
-        user.projects.push({project_id:project._id,title:project.title,description:project.description,image:project.image})
-        user.save().then(user=>{
-          res.statusCode=200;
-          res.setHeader('Content-type','application/json');
-          res.json(project)
-          },err=>next(err))
-          .catch(err=>next(err))
-        },err=>next(err))
-        .catch(err=>next(err))
-    },err=>next(err))
-    .catch(err=>next(err))
-  }else{
-    res.statusCode=401;
-    res.setHeader('Content-type','application/json')
-    res.json({message:"Login to add projects!"})
-  }
-})
-
+// .post(authenticate.verifyUser,(req,res,next)=>{
+//   console.log(req.body)
+//   if(req.user.admin){
+//     Projects.create(req.body).then(project=>{
+//       Users.findById(req.user._id).then(user=>{
+//         user.projects.push({project_id:project._id,title:project.title,description:project.description,image:project.image})
+//         user.save().then(user=>{
+//           res.statusCode=200;
+//           res.setHeader('Content-type','application/json');
+//           res.json(project)
+//           },err=>next(err))
+//           .catch(err=>next(err))
+//         },err=>next(err))
+//         .catch(err=>next(err))
+//     },err=>next(err))
+//     .catch(err=>next(err))
+//   }else{
+//     res.statusCode=401;
+//     res.setHeader('Content-type','application/json')
+//     res.json({message:"Login to add projects!"})
+//   }
+// })
+  .post(authenticate.verifyUser,(req,res,next)=>{
+    //console.log(req.body)
+    if(req.user.admin){
+      Projects.create(req.body).then(project=>{
+        res.statusCode=200;
+        res.setHeader('Content-type','application/json');
+        res.json(project)
+      },err=>next(err))
+      .catch(err=>next(err))
+    }else{
+      res.statusCode=401;
+      res.setHeader('Content-type','application/json')
+      res.json({message:"Login to add projects!"})
+    }
+  })
+  
 projectRouter.route('/:project_id')
 .get((req,res,next)=>{
   Projects.findById(req.params.project_id)

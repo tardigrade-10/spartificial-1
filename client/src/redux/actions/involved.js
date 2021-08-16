@@ -47,3 +47,31 @@ export const postInvolve=(formData)=>async(dispatch)=>{
     .catch(error=>alert(error))
 }
 
+export const filterInvolved=(searchText,data)=>async(dispatch)=>{
+  let temp1=data.filter(inv=>inv.name.toLowerCase().search(String(searchText.toLowerCase()))!==-1);
+
+  let temp2=data.filter(inv=>inv.email.toLowerCase().search(String(searchText.toLowerCase()))!==-1);
+
+  let temp3=data.filter(inv=>inv.type.toLowerCase().search(String(searchText.toLowerCase()))!==-1);
+
+  const involvedMap=new Map();
+  temp1.forEach(inv=>involvedMap.set(inv._id,inv));
+  temp2.forEach(inv=>{
+    const exists=involvedMap.has(inv._id);
+    if(!exists){
+      involvedMap.set(inv._id,inv)
+    }
+  })
+  temp3.forEach(inv=>{
+    const exists=involvedMap.has(inv._id)
+    if(!exists){
+      involvedMap.set(inv._id,inv)
+    }
+  })
+  var filteredData=[];
+  involvedMap.forEach(inv=>filteredData.push(inv));
+
+  dispatch({type:"FILTER_INVOLVED",payload:[
+    ...filteredData
+  ]})
+}

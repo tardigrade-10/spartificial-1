@@ -5,18 +5,33 @@ import {useDispatch,useSelector} from 'react-redux'
 import {userRegister,setLoading} from '../../redux/actions/user'
 import Loader from '../loader/Loading'
 import Toaster from '../loader/Toast'
+import { sendEmailOTP, verifyOtp } from '../../redux/actions/email'
 const Signup=()=>{
   const dispatch=useDispatch();
   const isLoading=useSelector(state=>state.users.isLoading)
 
+  const emailData=useSelector(state=>state.email)
+
+  const [emailOtp,setEmailOtp]=useState("")
+  const [validated,setValidated]=useState(true)
+
   const [signUpData,setsignUpdata]=useState({email:'',firstname:'',lastname:'',password:''})
 
+  const sendOtp=()=>{
+    if(signUpData.email!==""&&signUpData.firstname!==""&&signUpData.lastname!==""&&signUpData.password!==""&&signUpData.password.length>=8){
+      signUpData.username=signUpData.email.split('@')[0];
+      signUpData.otp=Math.floor(Math.random() * 99999) + 10000;  
+      setValidated(true)
+      dispatch(sendEmailOTP(signUpData))
+    }else{
+      setValidated(false)
+    }
+  }
   const signUp=(e)=>{
     e.preventDefault();
     //console.log(loginData)
-    signUpData.username=signUpData.email.split('@')[0];
-    dispatch(setLoading())
-    dispatch(userRegister(signUpData))
+    dispatch(verifyOtp(emailOtp,emailData))    
+    //dispatch(userRegister(signUpData))
     setsignUpdata({email:'',firstname:'',lastname:'',password:''})
   }
   const handleChangeSign=(e)=>{
@@ -34,6 +49,7 @@ const Signup=()=>{
           <h1>Register</h1>
           <div className="container">
             <form onSubmit={signUp}>
+              {!emailData.enterOtp?<>
               <div className="row">
                 <div className="col-12">
                   <input autoComplete="off" autoCapitalize="off" spellCheck="false" required type="email" name="email" placeholder="Email Address" value={signUpData.email} onChange={handleChangeSign}/>
@@ -51,10 +67,17 @@ const Signup=()=>{
                 <div className="col-12">
                   <input autoComplete="off" autoCapitalize="off" minLength="8" spellCheck="false" required type="password" name="password" placeholder="Password" value={signUpData.password} onChange={handleChangeSign}/>
                 </div>
-              </div>
+              </div></>:null}
+              {emailData.enterOtp?<div className="row">
+                <div className="col-12 pb-3"><small className="text-white">OTP sent to <strong>{emailData.signUpData.email}</strong></small></div>
+                <div className="col-12">
+                  <input required type="text" name="emailOtp" placeholder="Enter OTP" value={emailOtp} onChange={(e)=>setEmailOtp(e.target.value)}/>
+                </div>
+              </div>:null}
+              {!validated?<small className="text-danger">All fields are mandatory*</small>:null}
               <div className="row">
                 <div className="col-12">
-                  {!isLoading?(<button className="login-btn" type="submit">Sign Up</button>):(<Loader/>)}
+                  {!emailData.isLoading?(emailData.enterOtp?!isLoading?<button className="login-btn" type="submit">Sign Up</button>:<Loader/>:<button className="login-btn" type="button" onClick={sendOtp}>Send OTP</button>):(<Loader/>)}
                 </div>
               </div>
               <div className="row">

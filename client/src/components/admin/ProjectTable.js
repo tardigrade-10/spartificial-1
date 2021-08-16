@@ -27,7 +27,7 @@ const ViewModal=({show,setShow,req})=>{
           <div><p><strong>Start Date: </strong>{moment(req.startDate).format('Do MMMM YYYY')}</p></div>
           <div><p><strong>Need help: </strong>{req.help?"YES":"NO"}</p></div>
           <div><p><strong>Fees: </strong>₹{req.fees} per student</p></div>
-          <div><p><strong>Documents: </strong><a href={`${BASE_URL}/files/${req.documents}`}>{req.documents}</a></p></div>
+          <div><p><strong>Documents: </strong><a rel="noreferrer noopener" target="_blank" href={req.documents}>{req.documents}</a></p></div>
           <div className="text-center py-5">
             <button className="btn btn-sm btn-outline-danger"><strong>Approve</strong></button>
           </div>

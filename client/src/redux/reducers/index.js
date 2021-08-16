@@ -8,5 +8,5 @@ import {projects} from './project'
 import {instructor} from './instructor'
 import {payment} from './paymentlist'
 import {files} from './files'
-
-export const reducers=combineReducers({users,blogs,teams,involved,projects,instructor,payment,files})
+import { email } from './email'
+export const reducers=combineReducers({users,blogs,teams,involved,projects,instructor,payment,files,email})

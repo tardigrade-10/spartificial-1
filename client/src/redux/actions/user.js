@@ -281,3 +281,29 @@ export const getUserList=()=>async(dispatch)=>{
   }
 }
 
+export const filterUser=(searchText,data)=>async(dispatch)=>{
+  let temp1=data.filter(user=>(user.personal.firstname+" "+user.personal.lastname).toLowerCase().search(String(searchText.toLowerCase()))!==-1);
+  let temp2=data.filter(user=>user.personal.email.toLowerCase().search(String(searchText.toLowerCase()))!==-1);
+  let temp3=data.filter(user=>user.personal.phone.search(searchText)!==-1);
+
+  const userMap=new Map();
+  temp1.forEach(user=>userMap.set(user._id,user));
+  temp2.forEach(user=>{
+    const exists=userMap.has(user._id);
+    if(!exists){
+      userMap.set(user._id,user)
+    }
+  })
+  temp3.forEach(user=>{
+    const exists=userMap.has(user._id)
+    if(!exists){
+      userMap.set(user._id,user)
+    }
+  })
+  var filteredData=[];
+  userMap.forEach(user=>filteredData.push(user));
+  //console.log(filteredData)
+  dispatch({type:"FILTER_USER",payload:[
+    ...filteredData
+  ]})
+}

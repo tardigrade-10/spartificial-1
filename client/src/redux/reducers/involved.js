@@ -1,10 +1,16 @@
-export const involved=(involved=[],action)=>{
+export const involved=(state={
+  isLoading:true,
+  involvedOrig:null,
+  involved:null
+},action)=>{
   switch (action.type) {
     case 'GET_INVOLVED':
-      return {...involved,involved:action.payload}  
+      return {...state,involvedOrig:action.payload,involved:action.payload}  
     case 'POST_INVOLVED':
-      return {...involved,involved:action.payload}  
-      default:
-      return involved;
+      return {...state,involvedOrig:action.payload} 
+    case 'FILTER_INVOLVED':
+      return {...state,involved:action.payload}     
+    default:
+      return state;
   }
 }

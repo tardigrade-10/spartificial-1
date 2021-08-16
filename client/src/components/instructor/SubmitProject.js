@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import {Form, Modal} from 'react-bootstrap'
 import axios from 'axios'
 import { BASE_URL } from '../../config';
+import firebase from '../../config'
 
 const SubmitProject=({show,handleModal})=>{
   const [formData,setFormData]=useState({email:'',statement:'',projectName:'',projectObjectives:'',keywords:'',duration:0,startDate:'',help:false,fees:0,documents:''})
+
+  const [file, setFile] = useState(null);
 
   const [loading,setLoading]=useState({documents:false,submit:false,success:false})
 
@@ -13,37 +16,42 @@ const SubmitProject=({show,handleModal})=>{
   }
   const handleSubmit=async(e)=>{
     e.preventDefault()
-    let form = document.getElementById ('form');
-    let formD = new FormData (form);
-
-    //console.log(formD.getAll('uploadedFile'))
-    //console.log(formData)
-    setLoading({documents:true,submit:false,success:false})
-    try{
-      let response=await fetch(`${BASE_URL}/files/upload`,{
-        method:'POST',
-        body: formD
+    if(file===null){
+      alert("No file chosen!!!")
+    }else{
+      setLoading({documents:true,submit:false,success:false})
+      //console.log(file.name)
+      const task=firebase.storage().ref(`/documents/${file.name}`).put(file)
+      task.on('state_changed',(snapshot)=>{
+        //console.log(snapshot)
+      },err=>{
+        console.log(err)
+      },()=>{
+        firebase.storage().ref('documents').child(file.name).getDownloadURL().then(async(url)=>{
+          //console.log(url)
+          setLoading({documents:false,submit:true,success:false})
+          formData.documents=url
+          try {
+            let response_submit=await fetch (`${BASE_URL}/instructor/submit-project`,{
+              method:'POST',
+              body:JSON.stringify(formData),
+              headers:{
+                'Content-Type':'application/json'
+              }
+            })
+            if(!response_submit.ok){ throw new Error("Something went wrong! Please try again later.")}
+            //result=await response_submit.json()
+            setLoading({documents:false,submit:false,success:true})
+            setFormData({email:'',statement:'',projectName:'',projectObjectives:'',keywords:'',duration:0,startDate:'',help:false,fees:0,documents:''})
+            setTimeout(()=>{handleModal(false)},3000)
+  
+          } catch (error) {
+            alert("Something went wrong! Please try again later.")
+            console.log(error)
+            setLoading({documents:false,submit:false,success:false})
+          }
+        })
       })
-      let result=await response.json();
-      setLoading({documents:false,submit:true,success:false})
-      formData.documents=result.filename
-      //console.log(formData)
-      let response_submit=await fetch (`${BASE_URL}/instructor/submit-project`,{
-        method:'POST',
-        body:JSON.stringify(formData),
-        headers:{
-          'Content-Type':'application/json'
-        }
-      })
-      if(!response_submit.ok){ throw new Error("Something went wrong! Please try again later.")}
-      //result=await response_submit.json()
-      setLoading({documents:false,submit:false,success:true})
-      setFormData({email:'',statement:'',projectName:'',projectObjectives:'',keywords:'',duration:0,startDate:'',help:false,fees:0,documents:''})
-      setTimeout(()=>{handleModal(false)},3000)
-    }catch(error){
-      alert("Something went wrong! Please try again later.")
-      console.log(error)
-      setLoading({documents:false,submit:false,success:false})
     }
   }
   return(
@@ -92,7 +100,7 @@ const SubmitProject=({show,handleModal})=>{
               </Form.Group>
               <Form.Group required controlId="formFileSm">
                 <Form.Label>Upload project file(as single pdf file only)</Form.Label>
-                <Form.Control accept=".pdf" name="uploadedFile" type="file" size="sm"/>
+                <Form.Control onChange={(e)=>setFile(e.target.files[0])} accept=".pdf" name="uploadedFile" type="file" size="sm"/>
               </Form.Group>
           </Modal.Body>
           <Modal.Footer>

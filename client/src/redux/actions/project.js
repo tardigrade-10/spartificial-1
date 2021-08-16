@@ -27,13 +27,13 @@ export const getProjects=()=>async(dispatch)=>{
   .catch(error=>dispatch({type:'PROJECT_FAILED',payload:error}))
 }
 
-export const createProject=(projectData)=>async(dispatch)=>{
+export const createProject=(projectData,handleCancel)=>async(dispatch)=>{
   var userdetails=localStorage.getItem('userdetails');
-  userdetails=JSON.parse(userdetails);
+  //userdetails=JSON.parse(userdetails);
   //console.log(userdetails)
   
   if(userdetails){
-    const bearer=`Bearer ${userdetails.token}`
+    const bearer=`Bearer ${userdetails}`
 
     return fetch(url,{
       method:"POST",
@@ -60,8 +60,10 @@ export const createProject=(projectData)=>async(dispatch)=>{
     })
     .then(project=>{
       //console.log(project)
+      alert("Successful")
       dispatch({type:'CREATE_PROJECT',payload:project})
       dispatch(getProjects());
+      handleCancel()
     },err=>{throw err})
     .catch(error=>dispatch({type:'PROJECT_FAILED',payload:error}))
   }else{

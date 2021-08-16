@@ -15,19 +15,15 @@ const ViewModal=({show,setShow,req})=>{
       </Modal.Header>
       <Modal.Body style={{height:'75vh',overflowY:'scroll'}}>
         <div className="user-details">
-          <div className="text-center"><h5><strong>Joining Details</strong></h5></div>
+          <div className="text-center"><h5><strong>{req.type}</strong></h5></div>
           <div><p className="text-danger"><strong>Request Id: {req._id}</strong></p></div>
           <div><p><strong>Email: </strong>{req.email}</p></div>
+          <div><p><strong>Phone: </strong>{req.phone}</p></div>
           <div><p><strong>Status: </strong>{req.isResolved?"RESOLVED":"UNRESOLVED"}</p></div>
-          <div><p><strong>Preffered Languages: </strong>{req.language.split(";").map((val,idx)=>{return val+", "})}</p></div>
-          <div><p><strong>Linkedin: </strong><a href={req.linkedin}>{req.linkedin}</a></p></div>
-          <div><p><strong>Topics: </strong>{req.topics.split(";").map((val,idx)=>{return val+", "})}</p></div>
-          <div><p><strong>Description: </strong>{req.description}</p></div>
-          <div><p><strong>Idea: </strong>{req.idea}</p></div>
-          <div><p><strong>Experience: </strong>{req.experience}</p></div>
-          <div><p><strong>Resume: </strong><a rel="noreferrer noopener" target="_blank" href={req.resume}>{req.resume}</a></p></div>
+          {req.organisation?<div><p><strong>Organisation: </strong>{req.organisation}</p></div>:null}
+          <div><p><strong>Proposal: </strong>{req.proposal}</p></div>
           <div className="text-center py-5">
-            <button className="btn btn-sm btn-outline-danger"><strong>Approve</strong></button>
+            <button className="btn btn-sm btn-outline-danger"><strong>Accept</strong></button>
           </div>
         </div>
       </Modal.Body>
@@ -38,7 +34,7 @@ const ViewModal=({show,setShow,req})=>{
   )
 }
 
-const JoinTable=({tableCol,data})=>{
+const GetInvolvedTable=({tableCol,data})=>{
   const [view,setView]=useState(false)
   const [req,setReq]=useState(null)
   return(
@@ -58,8 +54,9 @@ const JoinTable=({tableCol,data})=>{
               <th>{idx+1}</th>
               <td>{req.name}</td>
               <td>{req.email}</td>
-              <td>{req.isResolved?"RESOLVED":"UNRESOLVED"}</td>
+              <td>{req.type}</td>
               <td>{moment(req.createdAt).format('MMMM Do YYYY')}</td>
+              <td>{req.isResolved?"RESOLVED":"UNRESOLVED"}</td>
             </tr>
           })}
         </tbody>
@@ -68,4 +65,4 @@ const JoinTable=({tableCol,data})=>{
   )
 }
 
-export default JoinTable
+export default GetInvolvedTable

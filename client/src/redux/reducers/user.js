@@ -1,6 +1,7 @@
 export const users=(state={
   isLoading:true,
   users:null,
+  usersOrig:null,
   errmess:null,
   success:null,
   current:null,
@@ -14,12 +15,13 @@ export const users=(state={
     case 'GET_USER':
       return {...state, isLoading:false,errmess:null,current:action.payload}
     case 'GET_USER_LIST':
-      return {...state, isLoading:false,errmess:null,users:action.payload}
-      case 'SIGNUP':
+      return {...state, isLoading:false,errmess:null,users:action.payload,usersOrig:action.payload}
+    case 'FILTER_USER':
+      return{...state, isLoading:false, errmess:null,users:action.payload}
+    case 'SIGNUP':
       return {...state, isLoading:false,errmess:null,success:action.payload}
     case 'LOGIN':
       return {...state, isLoading:false,errmess:null,success:action.payload}
-
     case 'LOGOUT':
       return {...state, isLoading:false,errmess:null,current:null}
     case 'CHANGE_PASSWORD':

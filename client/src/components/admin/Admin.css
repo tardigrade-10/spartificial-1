@@ -22,3 +22,21 @@
   color: darkblue;
   border-bottom: 1px solid darkblue;
 }
+.filter{
+  padding: 20px;
+  text-align: center;
+}
+.filter .filter-input{
+  text-align: center;
+  width: 20%;
+  transition: all 300ms;
+}
+.filter .filter-input:hover{
+  background-color: transparent;
+}
+.filter .filter-input:focus{
+  width: 50%;
+}
+.text-orange{
+  color: orange;
+}
